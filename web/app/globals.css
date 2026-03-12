@@ -1,0 +1,172 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Universal scrollbar hiding (prevents modal content shift) */
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+* {
+  -ms-overflow-style: none;  /* IE/Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: clip;
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 85%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --primary: 262.1 83.3% 57.8%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 85%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --accent: 210 40% 88%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --border: 214.3 31.8% 78%;
+    --input: 214.3 31.8% 78%;
+    --ring: 262.1 83.3% 57.8%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --primary: 262.1 83.3% 57.8%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 262.1 83.3% 57.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground text-sm;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Enforce minimum font size globally — prevents text-xs (12px) from
+     being smaller than the body baseline. Tailwind text-xs maps to
+     0.75rem (12px); this bumps it to match text-sm (14px). */
+  .text-xs {
+    font-size: 0.875rem !important;
+    line-height: 1.25rem !important;
+  }
+
+  /* Ensure form elements and toasts inherit the body font */
+  input, select, textarea, button, [data-sonner-toaster] {
+    font-family: inherit;
+  }
+
+  /* Balanced text wrapping for better typography */
+  h1, h2, h3, h4, h5, h6, p {
+    text-wrap: balance;
+  }
+
+  ul, ol {
+    list-style-position: outside;
+    padding-left: 1.25rem;
+  }
+}
+
+@layer utilities {
+  @keyframes pulse-bright {
+    0%, 100% {
+      color: rgb(196 181 253); /* purple-300 */
+    }
+    50% {
+      color: rgb(255 255 255); /* white */
+    }
+  }
+
+  .animate-pulse-bright {
+    animation: pulse-bright 3s ease-in-out infinite;
+  }
+
+  @keyframes pulse-slow {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.7;
+    }
+  }
+
+  .animate-pulse-slow {
+    animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+}
+
+/* Fix gradient text clipping issue (G, P, Q, J getting cut off) */
+.bg-clip-text {
+  padding-bottom: 0.15em;
+  display: inline-block;
+}
+
+/* Glassy card effect for light mode */
+.glass-card {
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+.dark .glass-card {
+  background: rgba(30, 30, 46, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+}
+
+/* Frost glass effects */
+.frost-light {
+  background: rgba(31, 41, 55, 0.50);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+
+.frost-dark {
+  background: rgba(17, 24, 39, 0.50);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+
+.frost-warm {
+  background: rgba(31, 41, 55, 0.75);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.frost-cold {
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+/* Tooltip styling handled by components/Tooltip.tsx
+   Use <Tooltip content="..."> instead of title="" attributes
+   for styled tooltips. Native title="" still works for basic
+   accessibility hints but won't get custom styling. */

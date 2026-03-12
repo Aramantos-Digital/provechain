@@ -1,0 +1,71 @@
+# Environment variables
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.key
+
+# Scripts with secrets (use .example versions instead)
+create-test-users.js
+run-migrations.js
+clean_commits.py
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+!web/lib/
+!cli/src/lib/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+venv/
+ENV/
+env/
+.venv
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Pi deployment scripts (contain infrastructure details)
+scripts/pi-*.sh
+scripts/pi-*.py
+
+# Supabase CLI temp files
+web/supabase/.temp/
+
+# AI Assistant and Private folders
+# Keep context and session reports private
+.claude/
+!.claude/README.md
+private/
+!private/README.md
+.vercel

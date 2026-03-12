@@ -1,0 +1,25 @@
+{
+  "buildCommand": "cd web && npm run build",
+  "devCommand": "cd web && npm run dev",
+  "installCommand": "cd web && npm install",
+  "framework": "nextjs",
+  "outputDirectory": "web/.next",
+  "crons": [
+    {
+      "path": "/api/cron/cleanup-proofs",
+      "schedule": "0 0 * * *"
+    },
+    {
+      "path": "/api/cron/process-automated-repos",
+      "schedule": "0 2 * * *"
+    },
+    {
+      "path": "/api/cron/process-automated-sources",
+      "schedule": "0 4 * * *"
+    },
+    {
+      "path": "/api/cron/upgrade-ots",
+      "schedule": "0 6 * * *"
+    }
+  ]
+}
